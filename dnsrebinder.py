@@ -66,7 +66,7 @@ def dns_response(data, domain, ip, rebind, ttl, counterMax, hostCounter):
         if qt in ['*', rqt]:
             print("Got a request for " + str(qname) + " Type: " + str(qt))
             if qn in hostCounter:
-                if hostCounter[qn] < counterMax:
+                if hostCounter[qn] % 2 == 0:
                     reply.add_answer(RR(rname=qname, rtype=getattr(QTYPE, rqt), rclass=1, ttl=ttl, rdata=A(ip)))
                 else:
                     reply.add_answer(RR(rname=qname, rtype=getattr(QTYPE, rqt), rclass=1, ttl=ttl, rdata=A(rebind)))
